@@ -20,7 +20,8 @@ module.exports.getDataUser = async (req, res, next) => {
     
     // ip, port clickDate, date.now()
     const clientData = new UserSchema({
-      ipAdress: ip,
+      ipAddRemote: req.connection.remoteAddress,
+      ipAdress: ip.data.ip,
       port: req.app.settings.port || process.env.PORT,
       currentDate: dateTime,
     })
@@ -28,8 +29,8 @@ module.exports.getDataUser = async (req, res, next) => {
     // await clientData.save();
     
     let data = {
-      ip: req.connection.remoteAddress,
-      // ipAddRemote: ip.data.ip,
+      ipRemote: req.connection.remoteAddress,
+      ipAddRemote: ip.data.ip,
       currentDate: dateTime,
       port: req.app.settings.port
     };

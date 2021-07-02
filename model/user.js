@@ -6,6 +6,10 @@ const UserSchema = new Schema({
     type: String,
     required: false,
   },
+  ipAddRemote: {
+    type: String,
+    required: true,
+  },
   ipAdress: {
     type: String,
     required: true,
