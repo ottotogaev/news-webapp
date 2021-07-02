@@ -52,12 +52,12 @@ try {
   console.log("Error: ", error);
 }
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}!`);
+app.listen(port, function () {
+  console.log(`App listening on port`, port);
 });
 
 // app.get("/getport", async (req, res) => {
-
+ m
 //   let ip = await fetch("https://api.ipify.org?format=json")
 //     .then((results) => results.json())
 //     .then((data) => data.ip);
