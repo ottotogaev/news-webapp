@@ -98,13 +98,10 @@ let data = {
 };
 
 function AddRules(index) {
-  if (
-    data.newItem.rules[index]
-  ) {
-
-    console.log('ichida bir nima bor')
-  } 
-  else{ // ichida hech narsa yuq
+  if (data.newItem.rules[index]) {
+    console.log("ichida bir nima bor");
+  } else {
+    // ichida hech narsa yuq
     let show = {
       showRules: true,
     };
@@ -121,6 +118,6 @@ function AddRules(index) {
 
   // console.log(data.newItem.rules[index].showRules);
   // data.newItem.rules[index].showRules = !data.newItem.rules[index].showRules;
-  return data.newItem.rule
+  return data.newItem.rule;
 }
 console.log(AddRules(0));
