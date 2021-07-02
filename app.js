@@ -57,7 +57,7 @@ app.listen(port, function () {
 });
 
 // app.get("/getport", async (req, res) => {
- m
+
 //   let ip = await fetch("https://api.ipify.org?format=json")
 //     .then((results) => results.json())
 //     .then((data) => data.ip);
