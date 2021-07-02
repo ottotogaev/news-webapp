@@ -15,7 +15,7 @@ module.exports.getDataUser = async (req, res, next) => {
     let dateTime = new Date().toLocaleString().replace(',','').replace('.',"-").replace('.',"-") + gmt;
 
     let ip = await axios.get("https://api.ipify.org?format=json")
-      // .then((results) => results.json())
+      // .then((results) => results.json()) 
       // .then((data) => data.ip);
     
     // ip, port clickDate, date.now()
@@ -28,7 +28,8 @@ module.exports.getDataUser = async (req, res, next) => {
     // await clientData.save();
     
     let data = {
-      ipAddRemote: ip.data.ip,
+      ip: req.connection.remoteAddress,
+      // ipAddRemote: ip.data.ip,
       currentDate: dateTime,
       port: req.app.settings.port
     };
