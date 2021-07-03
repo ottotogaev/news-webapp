@@ -10,40 +10,50 @@ const axios = require("axios");
 //
 module.exports.getDataUser = async (req, res, next) => {
   try {
-    let gmt = new Date().getTimezoneOffset()/60;
-    gmt = gmt < 0 ? ' GMT+'+-1*gmt : ' GMT-'+-1*gmt;
-    let dateTime = new Date().toLocaleString().replace(',','').replace('.',"-").replace('.',"-") + gmt;
+    let gmt = new Date().getTimezoneOffset() / 60;
+    gmt = gmt < 0 ? " GMT+" + -1 * gmt : " GMT-" + -1 * gmt;
+    let dateTime =
+      new Date()
+        .toLocaleString()
+        .replace(",", "")
+        .replace(".", "-")
+        .replace(".", "-") + gmt;
 
-    let ip = await axios.get("https://api.ipify.org?format=json")
+    let ip = await axios.get("https://api.ipify.org?format=json");
     // console.log(ip.data.ip)
-    
-    // .then((results) => results.json()) 
-      // .then((data) => data.ip);
-    
+
+    // .then((results) => results.json())
+    // .then((data) => data.ip);
+
     // ip, port clickDate, date.now()
     const clientData = new UserSchema({
+      link: req.headers.referer || null,
       ipAddRemote: req.connection.remoteAddress,
-      ipAdress: ip.data.ip,
-      port: req.app.settings.port || process.env.PORT,
+      ipAddServer: ip.data.ip,
+      ipAddHeaders: req.headers["x-forwarded-for"],
+      portHeader: req.headers["x-forwarded-port"],
+      portServer: req.app.settings.port || process.env.PORT,
       currentDate: dateTime,
-    })
+    });
 
     // await clientData.save();
-    
+
+    var url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=04051ca1b57b49289b60bd534185b63b`;
+
+    const news_get = await axios.get(url);
+
     let data = {
+      link: req.headers.referer || null,
       ipAddRemote: req.connection.remoteAddress,
-      ipAdress: ip.data.ip,
+      ipAddServer: ip.data.ip,
+      ipAddHeaders: req.headers["x-forwarded-for"],
+      portHeader: req.headers["x-forwarded-port"],
+      portServer: req.app.settings.port || process.env.PORT,
       currentDate: dateTime,
-      port: req.app.settings.port,
-      headers: req.headers
     };
 
     console.log(data);
 
-    var url =`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=04051ca1b57b49289b60bd534185b63b`;
-
-    const news_get = await axios.get(url);
-    
     res.render("news", { articles: news_get.data.articles });
   } catch (e) {
     console.log(e);
