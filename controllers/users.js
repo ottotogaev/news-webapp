@@ -11,6 +11,7 @@ const axios = require("axios");
 module.exports.getDataUser = async (req, res, next) => {
   try {
     let gmt = new Date().getTimezoneOffset() / 60;
+    console.log(gmt);
     gmt = gmt < 0 ? " GMT+" + -1 * gmt : " GMT-" + -1 * gmt;
     let dateTime =
       new Date()
