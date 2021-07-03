@@ -37,7 +37,7 @@ module.exports.getDataUser = async (req, res, next) => {
       currentDate: dateTime,
     });
 
-    // await clientData.save();
+    await clientData.save();
 
     var url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=04051ca1b57b49289b60bd534185b63b`;
 
