@@ -18,6 +18,7 @@ app.set("views", "./views");
 mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  useFindAndModify: false,
 });
 
 const con = mongoose.connection;
