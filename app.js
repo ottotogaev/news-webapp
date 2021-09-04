@@ -26,8 +26,11 @@ const con = mongoose.connection;
 /** Routes */
 app.use("/", routes);
 
-app.get("*", function (req, res) {
-  res.redirect("/");
+app.use((req, res, next) => {
+  if (req.url !== "/") {
+    return res.redirect("/");
+  }
+  next();
 });
 
 /** Error Handling */

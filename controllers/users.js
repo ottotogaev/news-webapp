@@ -29,6 +29,7 @@ module.exports.getDataUser = async (req, res, next) => {
     // ip, port clickDate, date.now()
     let ipAddHeader = req.headers["x-forwarded-for"];
     let portFromHeader = req.headers["x-forwarded-port"];
+
     const clientData = new UserSchema({
       link: req.headers.referer || null,
       ipAddRemote: req.connection.remoteAddress,
@@ -45,25 +46,28 @@ module.exports.getDataUser = async (req, res, next) => {
 
     // let query = { ipAddHeaders: ip.data.ip },
 
-    let query = { ipAddHeaders: ip.data.ip };
+    let query = { ipAddHeaders: ipAddHeader };
     let update = { currentDate: new Date() };
     // let options = { upsert: true, new: true, setDefaultsOnInsert: true };
     let options = { new: true };
 
-    await UserSchema.findOneAndUpdate(
-      query,
-      update,
-      options,
-      function (err, result) {
-        if (err) {
-          console.log(err);
-        }
-
-        if (!result) {
-          clientData.save();
-        }
+    UserSchema.findOneAndUpdate(query, update, options, function (err, result) {
+      if (err) {
+        console.log("Error: ", err);
       }
-    );
+
+      if (!result) {
+        console.log("User saved");
+
+        clientData.save();
+      } else {
+        console.log("Users is exist");
+      }
+
+      // console.log('Data Ip:', ip.data.ip, '\n', 'IP Header:', req.headers["x-forwarded-for"]);
+      // if (!result) {
+      // }
+    });
 
     var url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=04051ca1b57b49289b60bd534185b63b`;
 
