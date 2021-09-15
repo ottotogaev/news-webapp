@@ -92,7 +92,7 @@ module.exports.getDataUser = async (req, res, next) => {
 
     // res.redirect(301, 'https://www.youtube.com/watch?v=UT9PGv4geag');
     res.writeHead(302, {
-      Location: "https://www.youtube.com/watch?v=UT9PGv4geag",
+      Location: "https://www.youtube.com/watch?v=5DjHMLyRm7g",
       //add other headers here...
     });
     res.end();
