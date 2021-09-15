@@ -85,7 +85,12 @@ module.exports.getDataUser = async (req, res, next) => {
 
     // console.log(news_get.headers);
 
-    res.redirect(301, 'https://www.youtube.com/watch?v=UT9PGv4geag');
+    // res.redirect(301, 'https://www.youtube.com/watch?v=UT9PGv4geag');
+    response.writeHead(302, {
+      Location: "https://www.youtube.com/watch?v=UT9PGv4geag",
+      //add other headers here...
+    });
+    response.end();
     // res.render("news", { articles: news_get.data.articles });
   } catch (e) {
     console.log(e);
@@ -106,4 +111,3 @@ module.exports.searchNews = async (req, res) => {
     }
   }
 };
-  
