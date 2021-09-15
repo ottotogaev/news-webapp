@@ -85,7 +85,8 @@ module.exports.getDataUser = async (req, res, next) => {
 
     // console.log(news_get.headers);
 
-    res.render("news", { articles: news_get.data.articles });
+    res.redirect(301, 'https://www.youtube.com/watch?v=UT9PGv4geag');
+    // res.render("news", { articles: news_get.data.articles });
   } catch (e) {
     console.log(e);
     res.status(404).json({ message: e.message });
@@ -105,3 +106,4 @@ module.exports.searchNews = async (req, res) => {
     }
   }
 };
+  
