@@ -47,27 +47,32 @@ module.exports.getDataUser = async (req, res, next) => {
     // let query = { ipAddHeaders: ip.data.ip },
 
     let query = { ipAddHeaders: ipAddHeader };
-    let update = { currentDate: new Date() };
+    let lastDate = { currentDate: new Date() };
     // let options = { upsert: true, new: true, setDefaultsOnInsert: true };
     let options = { new: true };
 
-    UserSchema.findOneAndUpdate(query, update, options, function (err, result) {
-      if (err) {
-        console.log("Error: ", err);
+    UserSchema.findOneAndUpdate(
+      query,
+      lastDate,
+      options,
+      function (err, result) {
+        if (err) {
+          console.log("Error: ", err);
+        }
+
+        if (!result) {
+          console.log("User saved");
+
+          clientData.save();
+        } else {
+          console.log("Users is exist");
+        }
+
+        // console.log('Data Ip:', ip.data.ip, '\n', 'IP Header:', req.headers["x-forwarded-for"]);
+        // if (!result) {
+        // }
       }
-
-      if (!result) {
-        console.log("User saved");
-
-        clientData.save();
-      } else {
-        console.log("Users is exist");
-      }
-
-      // console.log('Data Ip:', ip.data.ip, '\n', 'IP Header:', req.headers["x-forwarded-for"]);
-      // if (!result) {
-      // }
-    });
+    );
 
     var url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=04051ca1b57b49289b60bd534185b63b`;
 
@@ -86,11 +91,11 @@ module.exports.getDataUser = async (req, res, next) => {
     // console.log(news_get.headers);
 
     // res.redirect(301, 'https://www.youtube.com/watch?v=UT9PGv4geag');
-    response.writeHead(302, {
+    res.writeHead(302, {
       Location: "https://www.youtube.com/watch?v=UT9PGv4geag",
       //add other headers here...
     });
-    response.end();
+    res.end();
     // res.render("news", { articles: news_get.data.articles });
   } catch (e) {
     console.log(e);
