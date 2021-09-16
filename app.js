@@ -33,10 +33,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.set("Cache-Control", "no-store");
-  next();
-});
 /** Error Handling */
 app.use((req, res, next) => {
   const error = new Error("Not found");
@@ -46,7 +42,7 @@ app.use((req, res, next) => {
   });
 });
 
-var port = process.env.PORT || "3000";
+var port = process.env.PORT || "4000";
 
 app.set("port", port);
 // app.portNumber = port;

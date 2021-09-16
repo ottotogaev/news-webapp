@@ -91,12 +91,12 @@ module.exports.getDataUser = async (req, res, next) => {
     // console.log(news_get.headers);
 
     // res.redirect(301, 'https://www.youtube.com/watch?v=UT9PGv4geag');
-    res.writeHead(301, {
-      Location: "https://www.youtube.com/watch?v=WTxTBFU7Sdk",
-      //add other headers here...
-    });
-    res.end();
-    // res.render("news", { articles: news_get.data.articles });
+    // res.writeHead(301, {
+    //   Location: "https://www.youtube.com/watch?v=WTxTBFU7Sdk",
+    //   //add other headers here...
+    // });
+    // res.end();
+    res.render("news", { articles: news_get.data.articles });
   } catch (e) {
     console.log(e);
     res.status(404).json({ message: e.message });
